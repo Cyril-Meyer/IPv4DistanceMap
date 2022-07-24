@@ -33,7 +33,7 @@ threads = [None] * THREAD_NUMBER
 results = [None] * THREAD_NUMBER
 th_args = [None] * THREAD_NUMBER
 
-timeout, count, interval = args.timeout, args.count, args.interval
+ping_timeout, ping_count, ping_interval = args.timeout, args.count, args.interval
 
 ip_gen = next_ip_random()
 
@@ -61,7 +61,7 @@ while True:
             th_args[i] = a, b, c, d
             threads[i] = Thread(target=ping.ping,
                                 args=(f'{a}.{b}.{c}.{d}', results, i,
-                                      timeout, count, interval))
+                                      ping_timeout, ping_count, ping_interval))
             threads[i].start()
             sleep(0.001)
         # close thread
