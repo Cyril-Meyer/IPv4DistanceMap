@@ -62,6 +62,7 @@ while True:
         # close thread
         elif not threads[i].is_alive():
             threads[i].join()
+            sleep(0.001)
             result = results[i]
             args = th_args[i]
             if result[0]:
