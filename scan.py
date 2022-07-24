@@ -63,11 +63,11 @@ while True:
                                 args=(f'{a}.{b}.{c}.{d}', results, i,
                                       ping_timeout, ping_count, ping_interval))
             threads[i].start()
-            sleep(0.001)
+            sleep(0.01)
         # close thread
         elif not threads[i].is_alive():
             threads[i].join()
-            sleep(0.001)
+            sleep(0.01)
             result = results[i]
             args = th_args[i]
             if result[0]:
@@ -83,4 +83,4 @@ while True:
             threads[i] = None
             count += 1
 
-    sleep(0.001)
+    sleep(0.1)
