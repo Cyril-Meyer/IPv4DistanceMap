@@ -1,14 +1,14 @@
 import pythonping
 
 
-def ping(ip, result=None, index=None):
+def ping(ip, result=None, index=None, timeout=10, count=3, interval=1):
     try:
-        response = pythonping.ping(ip, timeout=25, count=4, interval=1)
+        response = pythonping.ping(ip, timeout=timeout, count=count, interval=interval)
     except Exception as e:
         print(ip, e)
         return True, 254
     if result is None:
-        return response.success(), max(1, round(response.rtt_avg * 10))
+        return response.success(), min(max(1, round(response.rtt_avg * 10)), 250)
     else:
         result[index] = response.success(), max(1, round(response.rtt_avg*10))
 
