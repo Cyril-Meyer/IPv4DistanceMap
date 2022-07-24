@@ -6,6 +6,7 @@ def ping(ip, result=None, index=None):
         response = pythonping.ping(ip, timeout=25, count=4, interval=1)
     except Exception as e:
         print(ip, e)
+        return True, 254
     if result is None:
         return response.success(), max(1, round(response.rtt_avg * 10))
     else:

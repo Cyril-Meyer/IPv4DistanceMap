@@ -12,6 +12,7 @@ The value in the array correspond to an ip, and the value correspond to the foll
 |-------------|------------------------------------------------|
 | [0]         | not responding                                 |
 | [1, 250]    | ping reponse time in decisecond (10^-1 second) |
-| [251, 254]  | unused                                         |
+| [251, 253]  | unused                                         |
+| [254]       | exception                                      |
 | [255]       | not pinged yet                                 |
 
