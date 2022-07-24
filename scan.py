@@ -15,7 +15,8 @@ d_min, d_max = 1, 254
 
 def next_ip_random():
     while True:
-        yield randint(a_min, a_max), randint(b_min, b_max), randint(c_min, c_max), randint(d_min, d_max)
+        yield randint(a_min, a_max), randint(b_min, b_max),\
+              randint(c_min, c_max), randint(d_min, d_max)
 
 
 def next_ip_sequential():
@@ -31,6 +32,8 @@ THREAD_NUMBER = args.threads
 threads = [None] * THREAD_NUMBER
 results = [None] * THREAD_NUMBER
 th_args = [None] * THREAD_NUMBER
+
+timeout, count, interval = args.timeout, args.count, args.interval
 
 ip_gen = next_ip_random()
 
@@ -56,7 +59,9 @@ while True:
         if threads[i] is None:
             a, b, c, d = next(ip_gen)
             th_args[i] = a, b, c, d
-            threads[i] = Thread(target=ping.ping, args=(f'{a}.{b}.{c}.{d}', results, i))
+            threads[i] = Thread(target=ping.ping,
+                                args=(f'{a}.{b}.{c}.{d}', results, i,
+                                      timeout, count, interval))
             threads[i].start()
             sleep(0.001)
         # close thread
@@ -69,8 +74,8 @@ while True:
                 if data[args[0], args[1], args[2], args[3]] in [0, 255]:
                     data[args[0], args[1], args[2], args[3]] = result[1]
                 else:
-                    data[args[0], args[1], args[2], args[3]] = min(result[1],
-                                                                   data[args[0], args[1], args[2], args[3]])
+                    data[args[0], args[1], args[2], args[3]] =\
+                        min(result[1], data[args[0], args[1], args[2], args[3]])
                 count_pos += 1
             else:
                 data[args[0], args[1], args[2], args[3]] = 0
