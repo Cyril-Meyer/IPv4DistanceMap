@@ -130,3 +130,6 @@ dmypy.json
 
 # Results
 *.npy
+
+# PyCharm project
+.idea
