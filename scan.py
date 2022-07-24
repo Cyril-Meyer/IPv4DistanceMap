@@ -42,9 +42,9 @@ count_neg = 0
 t_init = time()
 t0 = t_init
 while True:
-    # save every 2 seconds
+    # save every 10 minutes
     t1 = time()
-    if t1 - t0 > 120:
+    if t1 - t0 > 600:
         t0 = time()
         print(f'{str(int(t1 - t_init)).zfill(6)} {str(count).zfill(10)} '
               f'(+{round(count_pos/count, 2)} -{round(count_neg/count, 2)})')
