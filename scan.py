@@ -66,7 +66,11 @@ while True:
             result = results[i]
             args = th_args[i]
             if result[0]:
-                data[args[0], args[1], args[2], args[3]] = result[1]
+                if data[args[0], args[1], args[2], args[3]] in [0, 255]:
+                    data[args[0], args[1], args[2], args[3]] = result[1]
+                else:
+                    data[args[0], args[1], args[2], args[3]] = min(result[1],
+                                                                   data[args[0], args[1], args[2], args[3]])
                 count_pos += 1
             else:
                 data[args[0], args[1], args[2], args[3]] = 0
